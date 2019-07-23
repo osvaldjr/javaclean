@@ -10,6 +10,7 @@ import br.community.javaclean.domains.exceptions.NotFoundException;
 import br.community.javaclean.domains.types.Features;
 import br.community.javaclean.gateways.PokemonGateway;
 import br.community.javaclean.gateways.ff4j.FeatureGateway;
+import br.community.javaclean.gateways.postgresql.PokemonDatabaseGateway;
 
 @Component
 public class DetailPokemon {
@@ -18,10 +19,16 @@ public class DetailPokemon {
 
   private final FeatureGateway featureGateway;
 
+  private final PokemonDatabaseGateway pokemonDatabaseGateway;
+
   @Autowired
-  public DetailPokemon(PokemonGateway pokemonGateway, FeatureGateway featureGateway) {
+  public DetailPokemon(
+      PokemonGateway pokemonGateway,
+      FeatureGateway featureGateway,
+      PokemonDatabaseGateway pokemonDatabaseGateway) {
     this.pokemonGateway = pokemonGateway;
     this.featureGateway = featureGateway;
+    this.pokemonDatabaseGateway = pokemonDatabaseGateway;
   }
 
   public Pokemon execute(Integer id, String name) {
@@ -35,6 +42,7 @@ public class DetailPokemon {
     } else {
       throw new NotFoundException("Feature detail pokemon not enable");
     }
+    pokemonDatabaseGateway.save(pokemon);
     return pokemon;
   }
 }

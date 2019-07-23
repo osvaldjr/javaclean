@@ -5,6 +5,7 @@ import br.community.javaclean.domains.exceptions.NotFoundException
 import br.community.javaclean.domains.types.Features
 import br.community.javaclean.gateways.PokemonGateway
 import br.community.javaclean.gateways.ff4j.FeatureGateway
+import br.community.javaclean.gateways.postgresql.PokemonDatabaseGateway
 import org.jeasy.random.EasyRandom
 import spock.lang.Specification
 
@@ -12,7 +13,8 @@ class DetailPokemonTest extends Specification {
 
     FeatureGateway featureGateway = Mock(FeatureGateway)
     PokemonGateway pokemonGateway = Mock(PokemonGateway)
-    DetailPokemon detailPokemon = new DetailPokemon(pokemonGateway, featureGateway)
+    PokemonDatabaseGateway pokemonDatabaseGateway = Mock(PokemonDatabaseGateway)
+    DetailPokemon detailPokemon = new DetailPokemon(pokemonGateway, featureGateway, pokemonDatabaseGateway)
 
     def "Should detail pokemon"() {
         given:
