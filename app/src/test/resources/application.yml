@@ -1,0 +1,12 @@
+#easy cucumber props
+target:
+  url: http://localhost:8080
+
+dependencies:
+  mockserver:
+    port: 1080
+
+#application props
+clients:
+  pokemon:
+    endpoint: http://localhost:1080/pokeapi

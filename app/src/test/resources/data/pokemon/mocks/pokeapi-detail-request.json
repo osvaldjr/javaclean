@@ -1,0 +1,9 @@
+{
+  "url": "/pokemon/.*",
+  "method": "GET",
+  "body": {},
+  "headers": {
+    "User-Agent": "Mozilla/5.0"
+  },
+  "queryParams": {}
+}
