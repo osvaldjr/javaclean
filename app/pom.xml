@@ -311,6 +311,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven.surefire.plugin.version}</version>
                 <configuration>
+                    <skip>${surefire.skipUTs}</skip>
                     <systemPropertyVariables>
                         <com.athaydes.spockframework.report.outputDir>target/spock
                         </com.athaydes.spockframework.report.outputDir>
@@ -425,7 +426,6 @@
                 <configuration>
                     <pgServerVersion>latest</pgServerVersion>
                     <pgServerPort>5432</pgServerPort>
-                    <pgHost>127.0.0.1</pgHost>
                     <dbName>javaclean</dbName>
                     <userName>postgres</userName>
                     <password>root</password>
@@ -443,6 +443,24 @@
                         <phase>post-integration-test</phase>
                         <goals>
                             <goal>stop</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <configuration>
+                    <skip>${surefire.skipITs}</skip>
+                    <includes>
+                        <include>**/RunEasyCucumberIT.java</include>
+                    </includes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
                         </goals>
                     </execution>
                 </executions>
